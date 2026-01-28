@@ -1,141 +1,347 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
+/* src/app/page.module.css */
 
 .main {
-  display: flex;
   min-height: 100vh;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
+  background-color: #f8f9fa; /* Fundo levemente mais claro */
+  padding: 2rem;
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem auto;
+}
+
+/* --- TOPO (Título + Ações Globais) --- */
+.headerTop {
+  display: flex;
   justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  align-items: flex-end;
+  margin-bottom: 2rem;
 }
 
-.intro {
+.title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1e272e;
+  line-height: 1;
+}
+
+.subtitle {
+  color: #808e9b;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.headerActions {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
+  gap: 1rem;
+}
+
+/* Botão Sair (Agora discreto e no topo) */
+.logoutBtn {
+  background: transparent;
+  color: #ff5e57;
+  border: 2px solid rgba(255, 94, 87, 0.2);
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 700;
   cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+  transition: all 0.2s;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.logoutBtn:hover {
+  background: #ff5e57;
+  color: white;
+  border-color: #ff5e57;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.addButton {
+  background-color: #1e272e;
+  color: white;
+  padding: 0.8rem 1.8rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+  background-color: #000;
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
+/* --- BARRA DE FERRAMENTAS (Filtros + Seleção) --- */
+.controlsBar {
+  background: white;
+  padding: 0.8rem 1rem; /* Mais compacto verticalmente */
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #f1f2f6;
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
+.filtersWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden; /* Garante que não quebre layout */
+}
 
-  .page {
-    --background: #000;
-    --foreground: #000;
+.filterLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a4b0be;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
 
-    --text-primary: #ededed;
-    --text-secondary: #999;
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 4px;
+  /* Esconde scrollbar nativa mas permite scroll */
+  scrollbar-width: none; 
+}
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
-  }
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilo Tabs/Pílulas Moderno */
+.filterBtn {
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  color: #57606f;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.filterBtn:hover {
+  background: #f1f2f6;
+  color: #2f3542;
+}
+
+.activeFilter {
+  background-color: #e3fcf7; /* Verde bem clarinho */
+  color: #00b894;
+  font-weight: 700;
+}
+
+/* --- LADO DIREITO (SELEÇÃO) --- */
+.selectionActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid #f1f2f6; /* Divisória visual */
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: #e1e2e6;
+}
+
+.selectAllLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  color: #2f3542;
+  font-size: 0.95rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.selectAllLabel:hover {
+  background: #f8f9fa;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #00b894;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.bulkDeleteBtn {
+  background-color: #ffeaa7;
+  color: #d63031;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.bulkDeleteBtn:hover {
+  background-color: #ff7675;
+  color: white;
+}
+
+/* --- GRID (Pequeno ajuste no responsivo) --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* ... Mantenha o restante (.card, .cardImage, etc) igual ... */
+.card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+  
+.card:hover {
+    transform: translateY(-5px);
+}
+  
+.selectedCard {
+    border-color: #00b894;
+    background-color: #f0fff4;
+}
+
+.cardCheckboxWrapper {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    background: white;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.cardImageContainer {
+    width: 100%;
+    height: 180px;
+    background-color: #f5f6fa;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardContent {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.productName {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2d3436;
+}
+
+.productPrice {
+    color: #00b894;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.productDesc {
+    color: #636e72;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f2f6;
+}
+
+.badge {
+    background-color: #dfe6e9;
+    color: #636e72;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editBtn, .deleteBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editBtn {
+    color: #7f8fa6;
+    background-color: #f5f6fa;
+}
+
+.editBtn:hover {
+    color: #0984e3;
+    background-color: #dff9fb;
+}
+
+.deleteBtn {
+    color: #ff7675;
+    background-color: #ffeaa750;
+}
+
+.deleteBtn:hover {
+    background-color: #ff7675;
+    color: white;
 }
